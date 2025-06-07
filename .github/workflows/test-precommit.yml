@@ -1,0 +1,44 @@
+name: Validate pre-commit tools in devkit image
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test-precommit:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build devkit image (no push)
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          tags: test/devkit
+
+      - name: Run pre-commit checks inside image
+        run: |
+          docker run --rm \
+            -v "${GITHUB_WORKSPACE}/testrepo:/workspace" \
+            -w /workspace \
+            test/devkit bash -c '
+              git init
+              git config --global --add safe.directory "$(pwd)"
+              git config user.name "GitHub Actions"
+              git config user.email "devkit@example.com"
+              git add .
+              pre-commit install
+              pre-commit run --all-files
+              status=$?
+              if [ "$status" -eq 0 ]; then
+                echo "❌ Pre-commit unexpectedly passed, but was expected to fail."
+                exit 1
+              else
+                echo "✅ Pre-commit failed as expected – test succeeded."
+                exit 0
+              fi
+            '
+
+
