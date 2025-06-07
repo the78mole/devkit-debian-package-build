@@ -19,7 +19,19 @@ RUN apt-get update && apt-get install -y \
     python3-setuptools \
     python3-wheel \
     shellcheck \
+    sudo \
+    vim \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Add vscode user
+RUN if ! getent group 1000; then \
+      groupadd --gid 1000 vscode; \
+    fi && \
+    if ! id -u 1000 > /dev/null 2>&1; then \
+      useradd --uid 1000 --gid 1000 -m vscode; \
+    fi && \
+    echo "vscode ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/vscode && \
+    chmod 0440 /etc/sudoers.d/vscode
 
 # GitHub CLI installieren
 RUN curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | \
