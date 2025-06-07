@@ -51,7 +51,7 @@ jobs:
       - name: Create GitHub release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ steps.semver.outputs.version }}
-          name: Release ${{ steps.semver.outputs.version }}
+          tag_name: ${{ steps.semver.outputs.version_tag }}
+          name: Release ${{ steps.semver.outputs.version_tag }}
           body: |
             Automated release based on PR labels/checklist.
