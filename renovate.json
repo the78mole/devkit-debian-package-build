@@ -1,20 +1,31 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:base"
+    "config:recommended"
   ],
   "dependencyDashboard": true,
   "packageRules": [
     {
-      "matchManagers": ["dockerfile"],
-      "matchPackageNames": ["debian"],
+      "matchManagers": [
+        "dockerfile"
+      ],
+      "matchPackageNames": [
+        "debian"
+      ],
       "groupName": "Base image updates"
     },
     {
-      "matchManagers": ["pip_requirements", "pip_setup", "poetry", "pipenv"],
+      "matchManagers": [
+        "pip_requirements",
+        "pip_setup",
+        "poetry",
+        "pipenv"
+      ],
       "groupName": "Python dependencies"
     }
   ],
-  "labels": ["dependencies"],
+  "labels": [
+    "dependencies"
+  ],
   "timezone": "Europe/Berlin"
 }
