@@ -10,6 +10,7 @@ Includes tools for packaging, linting, pre-commit checks, and CI integration.
 ![License](https://img.shields.io/github/license/the78mole/devkit-debian-package-build)
 ![Renovate](https://img.shields.io/badge/renovate-enabled-brightgreen?logo=renovatebot)
 
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/the78mole/devkit-debian-package-build)
 ---
 
 ## 🧰 Using as a Devcontainer
