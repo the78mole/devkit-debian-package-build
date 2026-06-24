@@ -1,4 +1,4 @@
-FROM debian:bookworm
+FROM debian:bookworm-20260623
 
 LABEL org.opencontainers.image.source="https://github.com/the78mole/devkit-debian-package-build"
 ENV DEBIAN_FRONTEND=noninteractive
